@@ -46,4 +46,10 @@ insert into DEPOTS values ('NA','24 rue Crébillon 44000 NANTES');
 insert into DEPOTS values ('PA','PARIS');
 insert into DEPOTS values ('BO','BORDEAUX');
 
+insert into EMPLOYES values (1,'Marie',53,3500);
+insert into EMPLOYES values (2,'Paul',28,1200);
+insert into EMPLOYES values (4,'Jean',35,2300);
+insert into EMPLOYES values (7,'Luc',41,1800);
+insert into EMPLOYES values (5,'Anne',25,1100);
+
 commit;
