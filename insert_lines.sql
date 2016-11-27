@@ -1,5 +1,17 @@
 insert into CLIENTS(NOCLI, NOMCLI)
-values (37, ‘Ets LAROCHE’);
+values (37, 'Ets LAROCHE');
+insert into CLIENTS(NOCLI, NOMCLI,VILLE)
+values (15, 'DUPONT S.A.','NANTES');
+insert into CLIENTS(NOCLI, NOMCLI,VILLE)
+values (20, 'Etb LABICHE','NANTES');
+insert into CLIENTS(NOCLI, NOMCLI,VILLE)
+values (35, 'DUBOIS Jean','NANTES');
+insert into CLIENTS(NOCLI, NOMCLI,VILLE)
+values (36, 'Bernard S.A.','PARIS');
+insert into CLIENTS(NOCLI, NOMCLI,VILLE)
+values (138, 'DUBOIS Jean','TOURS');
+insert into CLIENTS(NOCLI, NOMCLI,VILLE)
+values (152, 'LAROCHE','LE MANS');
 
 insert into ARTICLES
 values ('AB22', 'Tapis Persan', 1250.1, 2, 'IMPORT', 5);
