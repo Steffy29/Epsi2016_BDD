@@ -42,4 +42,8 @@ nocli number(6));
 insert into CLI44 
 select NOCLI from CLIENTS where VILLE='NANTES';
 
+insert into DEPOTS values ('NA','24 rue Crébillon 44000 NANTES');
+insert into DEPOTS values ('PA','PARIS');
+insert into DEPOTS values ('BO','BORDEAUX');
+
 commit;
