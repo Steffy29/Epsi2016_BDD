@@ -62,7 +62,7 @@ RESPONSABLE  varchar2(30) invisible
 create table DEPOTS(CODE char(2) primary key, ADRESSE varchar2(60));
 
 create table EMPLOYES(
-  NUMERO number(3) generated as identity,
+  NUMERO number(3),
   NOM    varchar2(30),
   AGE      number(3),
   SALAIRE  number(10)
