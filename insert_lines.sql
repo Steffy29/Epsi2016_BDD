@@ -29,3 +29,5 @@ nocli number(6));
 
 insert into CLI44 
 select NOCLI from CLIENTS where VILLE='NANTES';
+
+commit;
