@@ -59,3 +59,4 @@ DESIGNATION  varchar2(30),
 RESPONSABLE  varchar2(30) invisible
 );
 
+create table DEPOTS(CODE char(2) primary key, ADRESSE varchar2(60));
