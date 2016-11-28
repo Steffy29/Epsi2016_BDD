@@ -1,10 +1,8 @@
 create table ARTICLES(
 REFART        char(4) primary key,
 DESIGNATION   varchar2(30),
-PRIXHT        number(8,2),
-TAUXTVA       number(4,2)
-PRIXTTC       number(8,2)
-AS ( PRIXHT + round(PRIXHT * TAUXTVA/100,2) ),
+PRIX        number(8,2),
+CODE        number(4,2),
 CATEGORIE     char(10),
 QTESTK        number(5)
 );
