@@ -1,8 +1,10 @@
 create table ARTICLES(
 REFART        char(4) primary key,
 DESIGNATION   varchar2(30),
-PRIX          number(8,2),
-CODETVA       number(1),
+PRIXHT        number(8,2),
+TAUXTVA       number(4,2)
+PRIXTTC       number(8,2)
+AS ( PRIXHT + round(PRIXHT * TAUXTVA/100,2) ),
 CATEGORIE     char(10),
 QTESTK        number(5)
 );
@@ -27,8 +29,8 @@ DATECDE       date,
 ETATCDE       char(2),
 constraint PK_COMMANDES primary key (NOCDE),
 constraint FK_COMMANDES_CLIENTS foreign key(NOCLI)
-  reference CLIENTS(NOCLI)
-constraint CK_COMMANDES_ETAT check(ETATCDE in (‘EC’,’LI’,’SO’))
+  references CLIENTS(NOCLI),
+constraint CK_COMMANDES_ETAT check(ETATCDE in ('EC','LI','SO'))
 );
 
 create table LIGCDES(
@@ -42,15 +44,6 @@ REFART        char(4)
               references ARTICLES(REFART),
 QTCDE         number(5),
 constraint PK_LIGCDES primary key(NOCDE,NOLIG)
-);
-
-create table ARTICLES(
-REFART        char(4) primary key,
-DESIGNATION   varchar2(30),
-PRIXHT        number(8,2),
-TAUXTVA       number(4,2)
-PRIXTTC       number(8,2)
-AS ( PRIXHT + round(PRIXHT * TAUXTVA/100,2) )
 );
 
 create table CATEGORIES(
