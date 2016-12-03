@@ -19,6 +19,14 @@ create schema authorization LIVRE
     ville char(30)
   )
   create table articles(
+    refart char(4) primary key,
+    designation varchar2(30),
+    prix number(8,2),
+    codetva number(1),
+    categorie char(10),
+    qtestk number(5)
+  )
+  create table commandes(
     nocde number(9),
     nocli number(4),
     datecde date,
