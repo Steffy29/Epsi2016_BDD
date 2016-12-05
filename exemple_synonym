@@ -1,0 +1,26 @@
+SQL> select * from NOMENCLATURE;
+
+REFART  DESIGNATION       COMPOSANT   NOMBRE
+------  ----------------  ----------  --------
+XX55    VELOCIPEDE                    0
+x133    Roues             XX55        2
+x520    Cadre             XX55        1
+x456    Guidon            XX55        1
+QD24    Lot de tapis                  0
+AB03    Carpettes         QD24        10
+
+SQL> create synonym COMPOSE for NOMENCLATURE;
+
+SQL> select COMPOSE.REFART,COMPOSE.DESIGNATION,NOMENCLATURE.NOMBRE,
+ 2    NOMENCLATURE.DESIGNATION
+ 3    from NOMENCLATURE,COMPOSE
+ 4    where NOMENCLATURE.COMPOSANT=COMPOSE.REFART
+ 5    order by COMPOSE.REFART;
+ 
+REFART  DESIGNATION       NOMBRE      DESIGNATION
+------  ----------------  --------    ----------------
+QD24    Lot de tapis       10         Carpettes
+XX55    VELOCIPEDE          2         Roues
+XX55    VELOCIPEDE          1         Cadre
+XX55    VELOCIPEDE          1         Guidon
+ 
