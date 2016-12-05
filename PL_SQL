@@ -1,0 +1,103 @@
+SQL> declare
+  2    -- la collection de type nested table
+  3    type grille is table of number;
+  4    -- la collection de type index-by table
+  5    type rendezvous is table of date index by binary-integer;
+  6    -- les variables
+  7    lotto grille;
+  8    agenda rendezvous;
+  9  begin
+ 10    -- les numéros à jouer
+ 11    lotto:=grille(44,37,25,17);
+ 12    -- ajouter un rendez-vous
+ 13    agenda(2):=to_date('19/12/2016 17:00','DD/MM/YYYY HH24:MI');
+ 14  end;
+ 15  /
+ 
+SQL> declare
+  2    type calendrier is varray(366) of date;
+  3    -- déclare et initialise la collection
+  4    annee calendrier:=calendrier(to_date('01/01/2017','DD/MM/YYYY'));
+  5  begin
+  6    -- changement de la valeur
+  7    annee(1):=to_date('01/02/2017','DD/MM/YYYY')
+  8  end;
+  9  /
+
+SQL> declare
+  2    type T_CLIREC is record (
+  3       NOCLI      number(4),
+  4       NOM        char(20),
+  5       ADR        char(20),
+  6       CODPOST    number(5));
+  7    UNCLIENT T_CLIREC;
+  8  begin
+  9    -- instructions
+ 10    UNCLIENT.NOCLI:=1024;
+ 11    -- instructions
+ 12  end;
+ 13  /
+
+-- Déclaration d'une variable de même type que le nom client
+    DECLARE
+          V_nom       FLORIAN.CLIENTS.NOMCLI%TYPE;
+-- Déclaration de 2 variables de même type
+          x           NUMBER(10,3);
+          y           x%TYPE;
+          
+-- Déclaration d'une variable pouvant recevoir une ligne entière de la table ARTICLES
+    DECLARE
+          LIGART     ARTICLES%ROWTYPE;
+-- A l'utilisation on pourra prendre le nom simple
+          SELECT * INTO LIGART;
+-- ou prendre le nom en combinaison avec la colonne
+          x:=LIGART.prixht * 1.1;
+          
+SQL> variable x NUMBER;
+SQL> define t = CLIENTS;
+SQL> Begin
+  2    select COUNT(*) INTO :x from &t;
+  3  end;
+  4  /
+SQL> print x;
+
+DECLARE
+      Vref    CHAR(10);
+      Vprix   ARTICLES.PRIXHT%TYPE;
+      Cli     CLIENTS%ROWTYPE;
+BEGIN
+   select REFART, PRIXHT into Vref, Vprix from ARTICLES
+     where DESIGNATION = 'Cadeau';
+   select * INTO Cli from CLIENTS where NOCLI = 10;
+   
+DECLARE
+     Vnocli    CLIENTS.NOCLI%TYPE:=10;
+     Vnom      CLIENTS.NOM%TYPE;
+BEGIN
+     Vnom:='Dupont';
+     UPDATE CLIENTS SET NOM = Vnom where NOCLI = Vnocli;
+     Vnocli := Vnocli + 1;
+     INSERT INTO CLIENTS (NOCLI,NOM) VALUES (Vnocli, Vnom);
+     COMMIT;
+ END;
+ 
+ SQL> declare
+   2    a integer;
+   3    b integer;
+   4    c integer;
+   5  begin
+   6    a:=3;
+   7    b:=4;
+   8    c:=a+b;
+   9    -- a=3, b=4 et c=7
+  10    declare
+  11      a integer;  -- la variable a du bloc supérieur est masquée
+  12    begin
+  13      a:=5;
+  14      b:=10;
+  15      c:=a+b;
+  16      -- a=5, b=10 et c=15
+  17    end;
+  18    -- a=3, b=10 et c=15
+  19  end;
+  20  /
