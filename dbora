@@ -1,0 +1,44 @@
+#! /bin/sh
+#
+# chkconfig: 35 99 01
+# description: démarre et arrête les services Oracle
+#
+# Modifier la valeur des variables suivantes pour tenir compte de l'environnement
+ORACLE_HOME=/u01/app/oracle/product/12.1.0/dbhome_1
+ORACLE_HOME_LISTENER=$ORACLE_HOME
+ORACLE=oracle
+LOG=$ORACLE_HOME/dbora.log
+VAR_LOCK=/var/lock/subsys/dbora
+
+if [ ! "$2" = "ORA" ] ; then
+  su - $ORACLE -c "$0 $1 ORA"
+  case $1 in
+    'start')
+      # indiquer que le service a démarré (à priori)
+      touch $VAR_LOCK
+      ;;
+    'stop')
+      # indiquer que le service a été stoppé (à priori)
+      rm -f $VAR_LOCK
+  esac
+  exit
+fi
+
+PATH=${PATH}:$ORACLE_HOME/bin
+export ORACLE_HOME PATH
+
+touch $LOG
+chmod a+r $LOG
+case $1 in 
+  'start')
+    echo "***** $(date) - $0 : démarrage" > $LOG
+    $ORACLE_HOME/bin/dbstart $ORACLE_HOME_LISTENER > $LOG 2>&1 &
+    ;;
+  'stop')
+    echo "***** $(date) - $0 : arrêt" > $LOG
+    $ORACLE_HOME/bin/dbshut $ORACLE_HOME_LISTENER > $LOG 2>&1 &
+    ;;
+*)
+    echo "usage: $0 (start | stop)"
+esac
+exit  
